@@ -18,7 +18,7 @@ const divisions = [
     cta: "Launching Soon",
   },
   {
-    name: "LEM Supply Enterprise",
+    name: "LEM Enterprise",
     status: "Coming Soon",
     description:
       "Efficient procurement and delivery of essential goods that keep operations running every day.",
@@ -53,7 +53,7 @@ export default function Home() {
               home away from home with comfort and convenience.
             </p>
             <p>
-              <span className="font-semibold text-teal-800">LEM Supply Enterprise</span> ensures efficient
+              <span className="font-semibold text-teal-800">LEM Enterprise</span> ensures efficient
               delivery of essential goods for daily operations.
             </p>
             <p className="font-semibold text-amber-700">
