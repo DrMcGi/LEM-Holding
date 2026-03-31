@@ -39,6 +39,63 @@ h4 {
   font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
 }
 
+.holding-logo-stage {
+  position: relative;
+  animation: holding-float-in 900ms ease-out both;
+}
+
+.holding-logo-aura {
+  position: absolute;
+  inset: 10% 12%;
+  z-index: 0;
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.08) 34%, rgba(255, 255, 255, 0) 72%),
+    radial-gradient(circle at 72% 65%, rgba(251, 191, 36, 0.5) 0%, rgba(251, 191, 36, 0.08) 46%, rgba(251, 191, 36, 0) 72%);
+  filter: blur(16px);
+}
+
+.holding-logo-frame {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06)),
+    rgba(2, 44, 34, 0.34);
+  box-shadow:
+    0 24px 60px -30px rgba(0, 0, 0, 0.62),
+    inset 0 1px 0 rgba(255, 255, 255, 0.36),
+    inset 0 -22px 40px -30px rgba(245, 158, 11, 0.58);
+}
+
+.holding-logo-frame::after {
+  content: "";
+  position: absolute;
+  inset: -110% -70%;
+  background: linear-gradient(100deg, transparent 45%, rgba(255, 255, 255, 0.38) 50%, transparent 55%);
+  transform: translateX(-35%);
+  animation: holding-shimmer 5.4s ease-in-out infinite;
+}
+
+.holding-logo-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  padding: 0.8rem;
+}
+
+.holding-logo-fallback {
+  padding: 1.3rem 1rem;
+  text-align: center;
+  font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+  font-weight: 700;
+  color: #ecfeff;
+  letter-spacing: 0.05em;
+}
+
 .crawl-stage {
   perspective: 600px;
   overflow: hidden;
@@ -93,10 +150,41 @@ h4 {
   }
 }
 
+@keyframes holding-shimmer {
+  0% {
+    transform: translateX(-70%);
+  }
+  52% {
+    transform: translateX(70%);
+  }
+  100% {
+    transform: translateX(70%);
+  }
+}
+
+@keyframes holding-float-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .crawl-text {
     animation: none;
     transform: none;
+  }
+
+  .holding-logo-stage {
+    animation: none;
+  }
+
+  .holding-logo-frame::after {
+    animation: none;
   }
 
   .division-card {

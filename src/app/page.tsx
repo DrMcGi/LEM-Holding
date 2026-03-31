@@ -1,3 +1,6 @@
+import fs from "node:fs";
+import path from "node:path";
+import Image from "next/image";
 import Link from "next/link";
 
 const divisions = [
@@ -8,6 +11,7 @@ const divisions = [
       "Reliable home-away-from-home rentals designed for comfort, convenience, and peace of mind.",
     href: "https://lem-accommodation.vercel.app",
     cta: "Visit LEM Accommodation",
+    logoFile: "LEM-Accommodation_Logo.png",
   },
   {
     name: "LEM Projects",
@@ -16,6 +20,7 @@ const divisions = [
       "Critical operational and strategic project solutions that help businesses move faster and smarter.",
     href: "#",
     cta: "Launching Soon",
+    logoFile: "LEM-Projects_Logo.png",
   },
   {
     name: "LEM Enterprise",
@@ -24,14 +29,46 @@ const divisions = [
       "Efficient procurement and delivery of essential goods that keep operations running every day.",
     href: "#",
     cta: "Launching Soon",
+    logoFile: "LEM-Enterprise_Logo.png",
   },
 ];
+
+const divisionsWithAssets = divisions.map((division) => {
+  const logoDiskPath = path.join(process.cwd(), "public", "logos", division.logoFile);
+  const logoPath = fs.existsSync(logoDiskPath) ? `/logos/${division.logoFile}` : null;
+
+  return {
+    ...division,
+    logoPath,
+  };
+});
+
+const holdingLogoDiskPath = path.join(process.cwd(), "public", "logos", "LEM-Holding_Logo.png");
+const holdingLogoPath = fs.existsSync(holdingLogoDiskPath) ? "/logos/LEM-Holding_Logo.png" : null;
 
 export default function Home() {
   return (
     <main className="relative isolate overflow-x-hidden">
       <section className="mx-auto w-full max-w-6xl px-4 pb-10 pt-14 sm:px-6 lg:px-8">
         <div className="text-center">
+          <div className="holding-logo-stage mx-auto mb-6 w-full max-w-xs">
+            <div className="holding-logo-aura" aria-hidden />
+            <div className="holding-logo-frame">
+              {holdingLogoPath ? (
+                <Image
+                  src={holdingLogoPath}
+                  alt="LEM Holding logo"
+                  width={420}
+                  height={240}
+                  priority
+                  className="holding-logo-image"
+                />
+              ) : (
+                <div className="holding-logo-fallback">LEM Holding</div>
+              )}
+            </div>
+          </div>
+
           <p className="text-xs uppercase tracking-[0.22em] text-teal-700">LEM Holding</p>
           <h1 className="mt-4 text-4xl font-bold leading-tight text-stone-900 sm:text-6xl">
             Powering Solutions. Enabling Possibilities.
@@ -69,7 +106,7 @@ export default function Home() {
           </p>
 
           <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {divisions.map((division) => {
+            {divisionsWithAssets.map((division) => {
               const isLive = division.status === "Live";
 
               return (
@@ -78,8 +115,18 @@ export default function Home() {
                   className="division-card rounded-3xl border border-black/10 bg-white/90 p-6 shadow-md"
                 >
                   <div className="mb-5 flex items-center justify-between gap-3">
-                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-teal-200 bg-teal-50 text-xs font-bold tracking-[0.14em] text-teal-800">
-                      LEM
+                    <div className="relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border border-teal-200 bg-teal-50 shadow-sm">
+                      {division.logoPath ? (
+                        <Image
+                          src={division.logoPath}
+                          alt={`${division.name} logo`}
+                          fill
+                          sizes="56px"
+                          className="object-contain p-2"
+                        />
+                      ) : (
+                        <span className="text-xs font-bold tracking-[0.14em] text-teal-800">LEM</span>
+                      )}
                     </div>
                     <span
                       className={`rounded-full px-3 py-1 text-xs font-semibold ${
