@@ -48,7 +48,7 @@ const divisions: DivisionSeed[] = [
       "Efficient procurement and delivery of essential goods that keep operations running every day.",
     href: "#",
     cta: "Launching Soon",
-    logoFile: "LEM-Enterprise_Logo.png",
+    logoFile: "LEM-Supply-Enterprise_Logo.png",
     eyebrow: "Supply Engine",
     accent: "stone",
     promise: "Essential goods and dependable supply support for daily operations.",
