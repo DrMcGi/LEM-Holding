@@ -18,24 +18,12 @@ type DivisionSeed = {
 
 const divisions: DivisionSeed[] = [
   {
-    name: "LEM Accommodation",
+    name: "LEM Projects",
     status: "Live",
     description:
-      "Reliable home-away-from-home rentals designed for comfort, convenience, and peace of mind.",
-    href: "https://lem-accommodation.vercel.app",
-    cta: "Visit LEM Accommodation",
-    logoFile: "LEM-Accommodation_Logo.png",
-    eyebrow: "Comfort Infrastructure",
-    accent: "teal",
-    promise: "Home-away-from-home rentals with reliable monthly convenience.",
-  },
-  {
-    name: "LEM Projects",
-    status: "Coming Soon",
-    description:
       "Critical operational and strategic project solutions that help businesses move faster and smarter.",
-    href: "#",
-    cta: "Launching Soon",
+    href: "https://lem-projects.vercel.app",
+    cta: "Visit LEM Projects",
     logoFile: "LEM-Projects_Logo.png",
     eyebrow: "Strategic Execution",
     accent: "amber",
@@ -52,6 +40,18 @@ const divisions: DivisionSeed[] = [
     eyebrow: "Supply Engine",
     accent: "stone",
     promise: "Essential goods and dependable supply support for daily operations.",
+  },
+  {
+    name: "LEM Accommodation",
+    status: "Live",
+    description:
+      "Reliable home-away-from-home rentals designed for comfort, convenience, and peace of mind.",
+    href: "https://lem-accommodation.vercel.app",
+    cta: "Visit LEM Accommodation",
+    logoFile: "LEM-Accommodation_Logo.png",
+    eyebrow: "Comfort Infrastructure",
+    accent: "teal",
+    promise: "Home-away-from-home rentals with reliable monthly convenience.",
   },
 ];
 
