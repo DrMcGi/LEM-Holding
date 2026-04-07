@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
-import type { MouseEvent } from "react";
+import type { MouseEvent, ReactNode } from "react";
 
 type Division = {
   name: string;
@@ -157,6 +157,54 @@ function MagneticAnchor({ href, label, variant = "primary", target, rel }: Magne
   );
 }
 
+function ContactIcon({ kind }: { kind: "whatsapp" | "phone" | "mail" }) {
+  if (kind === "whatsapp") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden className="h-4 w-4 fill-current">
+        <path d="M20.52 3.48A11.84 11.84 0 0 0 12.07 0C5.55 0 .24 5.3.24 11.82c0 2.08.54 4.11 1.57 5.91L0 24l6.47-1.7a11.8 11.8 0 0 0 5.6 1.43h.01c6.52 0 11.83-5.3 11.83-11.82 0-3.16-1.23-6.12-3.39-8.43Zm-8.45 18.26h-.01a9.8 9.8 0 0 1-4.98-1.36l-.36-.21-3.84 1 1.03-3.74-.24-.38a9.82 9.82 0 0 1-1.5-5.23C2.17 6.41 6.58 2 12 2c2.62 0 5.08 1.01 6.93 2.86a9.72 9.72 0 0 1 2.88 6.94c0 5.42-4.41 9.84-9.74 9.84Zm5.4-7.38c-.29-.15-1.74-.86-2.01-.96-.27-.1-.47-.15-.66.15-.2.29-.76.96-.94 1.15-.17.2-.35.22-.64.08-.29-.15-1.24-.45-2.35-1.43-.87-.77-1.45-1.72-1.63-2.01-.17-.29-.02-.45.13-.6.14-.14.29-.35.44-.52.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.52-.08-.15-.66-1.59-.91-2.18-.24-.57-.48-.49-.66-.5h-.56c-.2 0-.52.08-.79.37-.27.29-1.04 1.01-1.04 2.47 0 1.45 1.06 2.86 1.2 3.05.15.2 2.08 3.18 5.05 4.46.71.31 1.27.49 1.7.63.71.23 1.35.2 1.86.12.57-.08 1.74-.71 1.99-1.4.25-.69.25-1.28.17-1.41-.07-.12-.27-.2-.56-.34Z" />
+      </svg>
+    );
+  }
+
+  if (kind === "phone") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden className="h-4 w-4 fill-current">
+        <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.58.11.35.03.74-.25 1.01l-2.2 2.2Z" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden className="h-4 w-4 fill-current">
+      <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4.24-7.47 4.67a1 1 0 0 1-1.06 0L4 8.24V6l8 5 8-5v2.24Z" />
+    </svg>
+  );
+}
+
+function ContactChip({ href, icon, value }: { href?: string; icon: ReactNode; value: string }) {
+  const content = (
+    <>
+      <span className="text-teal-200">{icon}</span>
+      <span>{value}</span>
+    </>
+  );
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        target={href.startsWith("http") ? "_blank" : undefined}
+        rel={href.startsWith("http") ? "noreferrer" : undefined}
+        className="inline-flex items-center gap-2 rounded-full border border-white/14 bg-white/6 px-3 py-2 text-sm font-semibold text-stone-100 transition hover:border-teal-300/40 hover:bg-white/10"
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return <div className="inline-flex items-center gap-2 rounded-full border border-white/14 bg-white/6 px-3 py-2 text-sm font-semibold text-stone-100">{content}</div>;
+}
+
 function DivisionCard({ division, index }: { division: Division; index: number }) {
   const prefersReducedMotion = useReducedMotion();
   const rotateX = useMotionValue(0);
@@ -305,12 +353,12 @@ export function HoldingExperience({ divisions, holdingLogoPath }: HoldingExperie
           <div className="closing-aurora" aria-hidden />
           <div className="final-ghost-grid" aria-hidden>
             <span>Projects</span>
-            <span>Accommodation</span>
-            <span>Supply</span>
+            <span>Strategy</span>
+            <span>Execution</span>
           </div>
           <div className="relative z-10 grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
             <motion.div variants={revealUp} className="final-mark">
-              <div className="text-xs uppercase tracking-[0.24em] text-teal-300">Final frame</div>
+              <div className="text-xs uppercase tracking-[0.24em] text-teal-300">Contact us</div>
               <div className="final-mark-shell mt-5">
                 {holdingLogoPath ? (
                   <Image src={holdingLogoPath} alt="LEM Holding logo" width={360} height={220} className="mx-auto h-auto w-full max-w-[16rem] object-contain" />
@@ -330,8 +378,11 @@ export function HoldingExperience({ divisions, holdingLogoPath }: HoldingExperie
               <motion.p variants={revealUp} className="relative z-10 mt-6 max-w-3xl text-lg leading-relaxed text-stone-200">
                 One group built to support business performance, daily operations, and reliable living with one clear standard of service.
               </motion.p>
-              <motion.div variants={revealUp} className="relative z-10 mt-8 flex flex-wrap gap-3">
+              <motion.div variants={revealUp} className="relative z-10 mt-8 flex flex-wrap items-center gap-3">
                 <MagneticAnchor href="mailto:info@lemprojects.co.za" label="Start a conversation" variant="secondary" />
+                <ContactChip href="https://wa.me/27764807410" icon={<ContactIcon kind="whatsapp" />} value="0764807410" />
+                <ContactChip href="tel:0823740090" icon={<ContactIcon kind="phone" />} value="0823740090" />
+                <ContactChip icon={<ContactIcon kind="mail" />} value="info@lemprojects.co.za" />
               </motion.div>
             </div>
           </div>
