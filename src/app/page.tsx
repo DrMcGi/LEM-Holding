@@ -31,11 +31,11 @@ const divisions: DivisionSeed[] = [
   },
   {
     name: "LEM Supply Enterprise",
-    status: "Coming Soon",
+    status: "Live",
     description:
       "Efficient procurement and delivery of essential goods that keep operations running every day.",
-    href: "#",
-    cta: "Launching Soon",
+    href: "https://lem-supply-enterprise.vercel.app",
+    cta: "Visit LEM Supply Enterprise",
     logoFile: "LEM-Supply-Enterprise_Logo.png",
     eyebrow: "Supply Engine",
     accent: "stone",
